@@ -6,18 +6,20 @@ interface User {
   password: string;
   firstName: string;
   lastName: string;
-}
-
-interface ResponseBody {
-  id: number;
-  username: string;
-  firstName: string;
-  lastName: string;
-  token: string;
+  image: string;
 }
 
 function fakeBackend() {
-  const users: User[] = [{ id: 1, username: 'info@codedthemes.com', password: 'admin123', firstName: 'Codedthemes', lastName: '.com' }];
+  const users: User[] = [
+    {
+      id: 1,
+      username: 'info@codedthemes.com',
+      password: 'admin123',
+      firstName: 'Lucas Seabra',
+      lastName: '.com',
+      image: 'https://cdn.vuetifyjs.com/images/john-smirk.png'
+    }
+  ];
   const realFetch = window.fetch;
 
   window.fetch = function (url: string, opts: { method: string; headers: { [key: string]: string }; body?: string }) {
@@ -31,6 +33,8 @@ function fakeBackend() {
             return authenticate();
           case url.endsWith('/users') && opts.method === 'GET':
             return getUsers();
+          case url.endsWith('/clients') && opts.method === 'GET':
+            return getClients();
           default:
             // pass through any requests not handled above
             return realFetch(url, opts)
@@ -49,7 +53,8 @@ function fakeBackend() {
           username: user.username,
           firstName: user.firstName,
           lastName: user.lastName,
-          token: 'fake-jwt-token'
+          token: 'fake-jwt-token',
+          image: user.image
         });
       }
 
@@ -58,8 +63,51 @@ function fakeBackend() {
         return ok(users);
       }
 
+      function getClients() {
+        if (!isAuthenticated()) return unauthorized();
+        const clients = [
+          {
+            number: 12343412,
+            name: 'Aeroporto de Goiânia',
+            address: 'Av. Castelo branco quadra 47 lote 01 - Goiânia',
+            isOpen: false
+          },
+          {
+            number: 12343412,
+            name: 'Aeroporto de Goiânia',
+            address: 'Av. Castelo branco quadra 47 lote 01 - Goiânia',
+            isOpen: true
+          },
+          {
+            number: 12343412,
+            name: 'Aeroporto de Goiânia',
+            address: 'Av. Castelo branco quadra 47 lote 01 - Goiânia',
+            isOpen: true
+          },
+          {
+            number: 12343412,
+            name: 'Aeroporto de Goiânia',
+            address: 'Av. Castelo branco quadra 47 lote 01 - Goiânia',
+            isOpen: true
+          },
+          {
+            number: 12343412,
+            name: 'Aeroporto de Goiânia',
+            address: 'Av. Castelo branco quadra 47 lote 01 - Goiânia',
+            isOpen: false
+          },
+          {
+            number: 12343412,
+            name: 'Aeroporto de Goiânia',
+            address: 'Av. Castelo branco quadra 47 lote 01 - Goiânia',
+            isOpen: true
+          }
+        ];
+        return ok(clients);
+      }
+
       // helper functions
-      function ok(body: User[] | ResponseBody): void {
+      function ok(body: Array<unknown> | object): void {
         resolve({ ok: true, text: () => Promise.resolve(JSON.stringify(body)) } as Response);
       }
 

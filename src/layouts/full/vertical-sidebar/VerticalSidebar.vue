@@ -6,10 +6,12 @@ import sidebarItems from './sidebarItem';
 import NavGroup from './NavGroup/NavGroup.vue';
 import NavItem from './NavItem/NavItem.vue';
 import NavCollapse from './NavCollapse/NavCollapse.vue';
-import ExtraBox from './extrabox/ExtraBox.vue';
 import Logo from '../logo/LogoMain.vue';
 
+import { useAuthStore } from '@/stores/auth';
+
 const customizer = useCustomizerStore();
+const authStore = useAuthStore();
 const sidebarMenu = shallowRef(sidebarItems);
 </script>
 
@@ -34,7 +36,7 @@ const sidebarMenu = shallowRef(sidebarItems);
     <!---Navigation -->
     <!-- ---------------------------------------------- -->
     <perfect-scrollbar class="scrollnavbar">
-      <v-list class="pa-4">
+      <v-list class="mt-8 pa-4">
         <!---Menu Loop -->
         <template v-for="(item, i) in sidebarMenu" :key="i">
           <!---Item Sub Header -->
@@ -48,12 +50,27 @@ const sidebarMenu = shallowRef(sidebarItems);
           <!---End Single Item-->
         </template>
       </v-list>
-      <div class="pa-4">
-        <ExtraBox />
-      </div>
-      <div class="pa-4 text-center">
-        <v-chip color="inputBorder" size="small"> v1.2.0 </v-chip>
-      </div>
+
+      <v-list class="pa-4 mt-8">
+        <v-list-item  color="primary" rounded="md">
+          <template v-slot:prepend>
+            <SettingsIcon size="20" class="mr-2" />
+          </template>
+
+          <v-list-item-title class="text-subtitle-2"> Configurações </v-list-item-title>
+        </v-list-item>
+
+        <v-list-item @click="authStore.logout()" color="primary" rounded="md">
+          <template v-slot:prepend>
+            <LogoutIcon size="20" class="mr-2" />
+          </template>
+
+          <v-list-item-title class="text-subtitle-2"> Sair</v-list-item-title>
+        </v-list-item>
+      </v-list>
+      
+      
+
     </perfect-scrollbar>
   </v-navigation-drawer>
 </template>

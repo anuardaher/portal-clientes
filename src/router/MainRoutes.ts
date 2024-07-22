@@ -17,35 +17,25 @@ const MainRoutes = {
       component: () => import('@/views/dashboards/default/DefaultDashboard.vue')
     },
     {
-      name: 'Starter',
-      path: '/starter',
+      name: 'Clientes',
+      path: '/clientes',
       component: () => import('@/views/StarterPage.vue')
     },
     {
-      name: 'Tabler Icons',
-      path: '/icons/tabler',
-      component: () => import('@/views/utilities/icons/TablerIcons.vue')
+      name: 'Visitas',
+      path: '/visitas',
+      component: () => import('@/views/StarterPage.vue')
     },
     {
-      name: 'Material Icons',
-      path: '/icons/material',
-      component: () => import('@/views/utilities/icons/MaterialIcons.vue')
+      name: 'Ocorrências',
+      path: '/ocorrencias',
+      component: () => import('@/views/StarterPage.vue')
     },
     {
-      name: 'Typography',
-      path: '/utils/typography',
-      component: () => import('@/views/utilities/typography/TypographyPage.vue')
+      name: 'Pontos Cadastrados',
+      path: '/pontos-cadastrados',
+      component: () => import('@/views/StarterPage.vue')
     },
-    {
-      name: 'Shadows',
-      path: '/utils/shadows',
-      component: () => import('@/views/utilities/shadows/ShadowPage.vue')
-    },
-    {
-      name: 'Colors',
-      path: '/utils/colors',
-      component: () => import('@/views/utilities/colors/ColorPage.vue')
-    }
   ]
 };
 

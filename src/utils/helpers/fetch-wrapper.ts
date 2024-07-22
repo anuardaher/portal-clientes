@@ -13,11 +13,6 @@ interface temp {
   body?: string;
 }
 
-interface UserData {
-  username: string;
-  password: string;
-}
-
 function request(method: string) {
   return (url: string, body?: object) => {
     const requestOptions: temp = {
@@ -46,7 +41,7 @@ function authHeader(url: string): Record<string, string> {
   }
 }
 
-function handleResponse(response: Response): Promise<UserData> {
+function handleResponse(response: Response) {
   return response.text().then((text: string) => {
     const data = text && JSON.parse(text);
 
@@ -61,7 +56,6 @@ function handleResponse(response: Response): Promise<UserData> {
       return Promise.reject(error);
     }
 
-    // Ensure data is of type UserData
-    return data as UserData;
+    return data;
   });
 }

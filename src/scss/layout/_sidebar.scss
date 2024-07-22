@@ -8,7 +8,7 @@
 }
 /*This is for the Vertical sidebar*/
 .scrollnavbar {
-  height: calc(100vh - 100px);
+  height: calc(100vh - 205px);
   .smallCap {
     padding: 0px 0 0 4px !important;
     font-size: 0.875rem;
@@ -23,7 +23,7 @@
     border-radius: $border-radius-root;
     padding-inline-start: calc(12px + var(--indent-padding) / 2) !important;
     &:hover {
-      color: rgb(var(--v-theme-secondary));
+      color: rgb(var(--v-theme-primary));
     }
     .v-list-item__prepend {
       margin-inline-end: 13px;
@@ -64,7 +64,7 @@
       position: relative;
       > .v-list-item--active,
       > .v-list-item:hover {
-        background: rgb(var(--v-theme-secondary), 0.05);
+        background: rgb(var(--v-theme-primary), 0.05);
       }
 
       &:after {
